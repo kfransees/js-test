@@ -4,7 +4,7 @@ const fs = require("fs");
 // Gets the directory path and runs all of its files
 module.exports.folderRunner = async function (folderName, data, result) {
   const directoryPath = path.join(__dirname, folderName);
-  console.log(folderName);
+  await module.exports.notifier(`Running files inside ${folderName}`);
   let files = fs.readdirSync(directoryPath);
   await filesRunner(files, folderName, data, result);
 };
@@ -47,4 +47,6 @@ const filesRunner = async (files, folderName, data, result) => {
       console.log(`${folderName}/${file} result: ${JSON.stringify(res)}`);
     });
   }
+
+  console.log("\n");
 };
